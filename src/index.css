@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 50% 97%;
+    --foreground: 345 50% 20%;
+
+    --card: 350 40% 96%;
+    --card-foreground: 345 50% 20%;
+
+    --popover: 30 50% 97%;
+    --popover-foreground: 345 50% 20%;
+
+    --primary: 345 70% 55%;
+    --primary-foreground: 30 50% 97%;
+
+    --secondary: 20 80% 90%;
+    --secondary-foreground: 345 50% 25%;
+
+    --muted: 350 30% 92%;
+    --muted-foreground: 345 30% 45%;
+
+    --accent: 40 80% 60%;
+    --accent-foreground: 345 50% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 350 40% 88%;
+    --input: 350 40% 88%;
+    --ring: 345 70% 55%;
+
+    --radius: 1rem;
+
+    /* Valentine custom tokens */
+    --rose: 345 70% 65%;
+    --rose-deep: 345 60% 45%;
+    --blush: 350 80% 92%;
+    --peach: 20 80% 85%;
+    --cream: 30 50% 97%;
+    --golden: 40 80% 60%;
+    --golden-soft: 40 60% 75%;
+
+    --font-script: 'Dancing Script', cursive;
+    --font-display: 'Great Vibes', cursive;
+    --font-serif: 'Playfair Display', serif;
+
+    --shadow-glow: 0 0 30px hsl(345 70% 65% / 0.3);
+    --shadow-golden: 0 0 40px hsl(40 80% 60% / 0.25);
+    --shadow-soft: 0 8px 32px hsl(345 50% 20% / 0.08);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-serif);
+  }
+}
+
+@layer utilities {
+  .font-script {
+    font-family: var(--font-script);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .text-shadow-glow {
+    text-shadow: 0 0 20px hsl(345 70% 65% / 0.4), 0 0 40px hsl(345 70% 65% / 0.2);
+  }
+
+  .text-shadow-golden {
+    text-shadow: 0 0 20px hsl(40 80% 60% / 0.4), 0 0 40px hsl(40 80% 60% / 0.2);
+  }
+
+  .glass-card {
+    background: hsl(30 50% 97% / 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(350 40% 88% / 0.5);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .paper-texture {
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, hsl(20 80% 85% / 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, hsl(350 80% 92% / 0.2) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(30 50% 97%) 0%, hsl(30 40% 94%) 100%);
+  }
+}
+
+/* Keyframe animations */
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) rotate(45deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(345 70% 65% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 35px hsl(345 70% 65% / 0.5), 0 0 60px hsl(345 70% 65% / 0.2);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.05); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.08); }
+  56% { transform: scale(1); }
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg) translateX(0px);
+    opacity: 0;
+  }
+  10% { opacity: 0.8; }
+  100% {
+    transform: translateY(110vh) rotate(360deg) translateX(80px);
+    opacity: 0;
+  }
+}
+
+@keyframes screen-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+@keyframes typewriter-line {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spotlight {
+  0%, 100% {
+    box-shadow: 0 0 30px hsl(40 80% 60% / 0.3), 0 0 60px hsl(345 70% 65% / 0.2);
+  }
+  50% {
+    box-shadow: 0 0 50px hsl(40 80% 60% / 0.5), 0 0 100px hsl(345 70% 65% / 0.3);
+  }
+}
+
+.animate-float-up {
+  animation: float-up var(--duration, 8s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 2.5s ease-in-out infinite;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.animate-petal-fall {
+  animation: petal-fall var(--duration, 6s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.animate-screen-shake {
+  animation: screen-shake 0.5s ease-in-out;
+}
+
+.animate-spotlight {
+  animation: spotlight 3s ease-in-out infinite;
+}
+
+.animate-typewriter-line {
+  animation: typewriter-line 0.8s ease-out forwards;
+}
