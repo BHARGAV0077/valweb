@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from "react";
 import FloatingHearts from "@/components/Valentine/FloatingHearts";
 import LoveLetterModal from "@/components/Valentine/LoveLetterModal";
@@ -22,6 +23,7 @@ const NO_TEXTS = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
   const [headlinePhase, setHeadlinePhase] = useState(0);
   const [noHoverCount, setNoHoverCount] = useState(0);
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
@@ -339,7 +341,9 @@ const Index = () => {
         onClose={() => setLetterOpen(false)}
         herName={HER_NAME}
         yourName={YOUR_NAME}
+        navigate={navigate} // ← Add this line
       />
+
 
       {/* Secret */}
       <div

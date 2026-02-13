@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom"; // optional if you want to use inside modal
 
 interface LoveLetterModalProps {
   isOpen: boolean;
   onClose: () => void;
   herName: string;
   yourName: string;
+  navigate: (path: string) => void; // ← Pass navigate function from parent
 }
 
 const getLetter = (herName: string, yourName: string): string[] => [
@@ -29,7 +31,7 @@ const getLetter = (herName: string, yourName: string): string[] => [
   `${yourName} ❤️`,
 ];
 
-const LoveLetterModal = ({ isOpen, onClose, herName, yourName }: LoveLetterModalProps) => {
+const LoveLetterModal = ({ isOpen, onClose, herName, yourName, navigate }: LoveLetterModalProps) => {
   const [visibleLines, setVisibleLines] = useState(0);
   const [modalOpacity, setModalOpacity] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -113,19 +115,18 @@ const LoveLetterModal = ({ isOpen, onClose, herName, yourName }: LoveLetterModal
             return (
               <p
                 key={i}
-                className={`transition-all duration-500 ${
-                  isGreeting
-                    ? "font-script text-2xl text-rose-deep mb-3"
-                    : isEmpty
+                className={`transition-all duration-500 ${isGreeting
+                  ? "font-script text-2xl text-rose-deep mb-3"
+                  : isEmpty
                     ? "h-3"
                     : isEmphasis
-                    ? "font-serif italic text-rose-deep leading-relaxed text-sm md:text-base"
-                    : isSignoff
-                    ? "font-script text-xl text-rose-deep mt-6 pt-2"
-                    : isName
-                    ? "font-script text-xl text-rose-deep"
-                    : "font-serif text-foreground leading-relaxed text-sm md:text-base"
-                }`}
+                      ? "font-serif italic text-rose-deep leading-relaxed text-sm md:text-base"
+                      : isSignoff
+                        ? "font-script text-xl text-rose-deep mt-6 pt-2"
+                        : isName
+                          ? "font-script text-xl text-rose-deep"
+                          : "font-serif text-foreground leading-relaxed text-sm md:text-base"
+                  }`}
                 style={{
                   opacity: 1,
                   animation: `typewriter-line 0.6s ease-out`,
@@ -153,13 +154,27 @@ const LoveLetterModal = ({ isOpen, onClose, herName, yourName }: LoveLetterModal
         </div>
 
         {visibleLines >= lines.length && (
-          <button
-            onClick={handleClose}
-            className="mt-8 mx-auto block font-script text-muted-foreground hover:text-rose-deep transition-colors duration-300 text-lg"
-            style={{ animation: "typewriter-line 0.6s ease-out" }}
-          >
-            Close with love ✕
-          </button>
+          <div className="flex flex-col items-center gap-4 mt-8">
+            {/* Close button */}
+            <button
+              onClick={handleClose}
+              className="block font-script text-muted-foreground hover:text-rose-deep transition-colors duration-300 text-lg"
+              style={{ animation: "typewriter-line 0.6s ease-out" }}
+            >
+              Close with love ✕
+            </button>
+
+            {/* New button to open friend's page */}
+            <button
+              onClick={() =>
+                window.open("https://roaring-parfait-b005c9.netlify.app", "_blank")
+              }
+              className="block font-script text-white bg-gradient-to-r from-cyan-400 to-pink-500 px-6 py-3 rounded-full shadow-[0_0_20px_cyan,0_0_40px_pink] hover:scale-105 transition-all duration-300 text-lg"
+            >
+              Open My Surprise 💖
+            </button>
+
+          </div>
         )}
       </div>
     </div>
